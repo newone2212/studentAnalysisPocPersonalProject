@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Data Analysis</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to Student Data Analysis</h1>
+    
+    <form id="subjectStatisticsForm">
+        <label for="subject">Enter the subject:</label>
+        <input type="text" id="subject" name="subject" required>
+        <button type="button" onclick="calculateSubjectStatistics()">Calculate Subject Statistics</button>
+    </form>
+
+    <form id="overallAverageForm">
+        <label for="studentName">Enter the student's name:</label>
+        <input type="text" id="studentName" name="studentName" required>
+        <button type="button" onclick="calculateOverallAverage()">Calculate Overall Average</button>
+    </form>
+
+    <button type="button" onclick="calculateTotalStudents()">Calculate Total Number of Students</button>
+
+    <div id="resultContainer"></div>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        function calculateSubjectStatistics() {
+            var subject = $('#subject').val();
+
+            $.post("/calculate_subject_statistics", { subject: subject }, function (data) {
+                displayResult(data);
+            });
+        }
+
+        function calculateOverallAverage() {
+            var studentName = $('#studentName').val();
+
+            $.post("/calculate_overall_average", { student_name: studentName }, function (data) {
+                displayResult(data);
+            });
+        }
+
+        function calculateTotalStudents() {
+            $.get("/calculate_total_students", function (data) {
+                displayResult(data);
+            });
+        }
+
+        function displayResult(data) {
+            var resultContainer = $('#resultContainer');
+            resultContainer.empty();
+
+            if (data.message) {
+                resultContainer.append('<p>' + data.message + '</p>');
+            } else {
+                for (var key in data) {
+                    resultContainer.append('<p>' + key + ': ' + data[key] + '</p>');
+                }
+            }
+        }
+    </script>
+</body>
+</html>

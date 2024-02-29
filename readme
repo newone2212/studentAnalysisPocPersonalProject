@@ -1,0 +1,14 @@
+# Your Flask App Name
+
+## Overview
+This is a simple Flask web application that [provide a brief description of what your app does].
+
+## Getting Started
+1. Install Flask: Run pip install Flask to install the Flask package.
+2. Run the App: Execute python app.py to start the Flask development server.or, we can just write python app.py in terminal.
+3. Access the App: Open your web browser and go to [http://localhost:5000](http://localhost:5000).
+
+## Project Structure
+- app.py: Contains the main Flask application.
+- templates/: Stores HTML templates for your app.
+- static/: Holds static files like stylesheets and client-side scripts.
